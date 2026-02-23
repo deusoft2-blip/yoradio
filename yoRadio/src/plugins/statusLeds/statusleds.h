@@ -14,10 +14,7 @@ public:
 
 private:
   bool _blueBlinkState;
-<<<<<<< codex/implement-radio-led-control-plugin-y9d5pr
   bool _isPlaying;
-=======
->>>>>>> main
   void applyStates(bool fromTicker = false);
   void writeLed(uint8_t pin, bool value, bool invert);
 };
