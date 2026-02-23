@@ -460,12 +460,12 @@ void Telnet::on_input(const char* str, uint8_t clientId) {
     return;
   }
   char ssidbuf[50], passbuff[50];
-  if (sscanf(str, "wifi.con(\"%[^\"]\",\"%[^\"]\")", ssidbuf, passbuff) == 2 || 
-      sscanf(str, "wifi.con(%[^,],%[^)])", ssidbuf, passbuff) == 2 || 
-      sscanf(str, "wifi.con(%[^ ] %[^)])", ssidbuf, passbuff) == 2 || 
-      sscanf(str, "wifi %[^ ] %s", ssidbuf, passbuff) == 2) {
+  if (sscanf(str, "wifi.con(\"%49[^\"]\",\"%49[^\"]\")", ssidbuf, passbuff) == 2 || 
+      sscanf(str, "wifi.con(%49[^,],%49[^)])", ssidbuf, passbuff) == 2 || 
+      sscanf(str, "wifi.con(%49[^ ] %49[^)])", ssidbuf, passbuff) == 2 || 
+      sscanf(str, "wifi %49[^ ] %49s", ssidbuf, passbuff) == 2) {
     snprintf(cmBuf, sizeof(cmBuf), "New SSID: \"%s\" with PASS: \"%s\" for next boot\n> ", ssidbuf, passbuff);
-    printf(clientId, cmBuf);
+    printf(clientId, "%s", cmBuf);
     printf(clientId, "...REBOOTING...\n> ");
     memset(cmBuf, 0, sizeof(cmBuf));
     snprintf(cmBuf, sizeof(cmBuf), "%s\t%s", ssidbuf, passbuff);
