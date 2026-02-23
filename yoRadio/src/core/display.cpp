@@ -623,7 +623,8 @@ void Display::_time(bool redraw) {
     //_clock->moveTo({clockConf.left, ft, 0});
     _clock->moveTo({lt, ft, 0});
   }
-  _clock->draw(redraw);
+  // Keep compatibility with ClockWidget variants that expose draw() without arguments.
+  _clock->draw();
   /*#ifdef USE_NEXTION
     nextion.printClock(network.timeinfo);
   #endif*/

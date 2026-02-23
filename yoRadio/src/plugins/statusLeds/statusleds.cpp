@@ -2,8 +2,11 @@
 
 #include <WiFi.h>
 
+<<<<<<< codex/implement-radio-led-control-plugin-y9d5pr
+=======
 #include "../../core/player.h"
 
+>>>>>>> main
 #ifndef STATUS_LED_GREEN_PIN
   #define STATUS_LED_GREEN_PIN 255
 #endif
@@ -34,7 +37,11 @@
 
 statusLeds ledStatusPlugin;
 
+<<<<<<< codex/implement-radio-led-control-plugin-y9d5pr
+statusLeds::statusLeds() : _blueBlinkState(false), _isPlaying(false) {
+=======
 statusLeds::statusLeds() : _blueBlinkState(false) {
+>>>>>>> main
   registerPlugin();
   log_i("statusLeds plugin is registered");
 }
@@ -45,10 +52,16 @@ void statusLeds::writeLed(uint8_t pin, bool value, bool invert) {
 }
 
 void statusLeds::applyStates(bool fromTicker) {
+<<<<<<< codex/implement-radio-led-control-plugin-y9d5pr
+  const bool isWifiConnected = WiFi.status() == WL_CONNECTED;
+
+  writeLed(STATUS_LED_GREEN_PIN, _isPlaying, STATUS_LED_GREEN_INVERT);
+=======
   const bool isPlaying = player.status() == PLAYING;
   const bool isWifiConnected = WiFi.status() == WL_CONNECTED;
 
   writeLed(STATUS_LED_GREEN_PIN, isPlaying, STATUS_LED_GREEN_INVERT);
+>>>>>>> main
 
   if (isWifiConnected) {
     _blueBlinkState = true;
@@ -74,10 +87,18 @@ void statusLeds::on_setup() {
 }
 
 void statusLeds::on_start_play() {
+<<<<<<< codex/implement-radio-led-control-plugin-y9d5pr
+  _isPlaying = true;
+=======
+>>>>>>> main
   applyStates();
 }
 
 void statusLeds::on_stop_play() {
+<<<<<<< codex/implement-radio-led-control-plugin-y9d5pr
+  _isPlaying = false;
+=======
+>>>>>>> main
   applyStates();
 }
 
