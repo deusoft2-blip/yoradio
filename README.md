@@ -231,7 +231,26 @@ To use it, inherit from `Plugin` and override the necessary virtual methods.
 Place your new class in the `src/plugins/<MyPlugin>` directory
 More details can be found in the comments within the `yoRadio/src/pluginsManager/pluginsManager.h` file and at [here](https://github.com/e2002/yoradio/blob/main/yoRadio/src/pluginsManager/README.md).  
 Additional examples are provided in the `examples/plugins` folder.
-Work is in progress...
+
+### Plugin: statusLeds (green/blue/red LEDs)
+A ready-to-use plugin is available at `yoRadio/src/plugins/statusLeds`:
+- **Green LED**: ON while radio playback is running.
+- **Blue LED**: ON when Wi-Fi is connected, optional blink when disconnected.
+- **Red LED**: ON while the radio device is powered (plugin active).
+
+Configuration (add to `myoptions.h`):
+```c++
+#define STATUS_LED_GREEN_PIN    16
+#define STATUS_LED_BLUE_PIN     17
+#define STATUS_LED_RED_PIN      5
+
+// optional: invert logic for active-low LED circuits
+//#define STATUS_LED_GREEN_INVERT true
+//#define STATUS_LED_BLUE_INVERT  true
+//#define STATUS_LED_RED_INVERT   true
+//#define STATUS_LED_BLUE_BLINK_WHEN_DISCONNECTED true
+```
+Set any `*_PIN` to `255` to disable that LED output.
 
 ---
 ## Version history
