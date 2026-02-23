@@ -1610,10 +1610,10 @@ uint32_t Audio::stop_mp3client(){
     int v=read_register(SCI_VOL);
     m_f_webstream=false;
     write_register(SCI_VOL, 0);                         // Mute while stopping
-    #ifdef ESP_ARDUINO_3
-    _client->clear();                                     // Flush stream client
+    #if defined(ESP_ARDUINO_VERSION_MAJOR) && (ESP_ARDUINO_VERSION_MAJOR >= 3)
+    _client->clear();                                     // Clear buffered stream data
     #else
-    _client->flush();
+    _client->flush();                                     // Flush stream client
     #endif
     _client->stop();                                      // Stop stream client
     write_register(SCI_VOL, v);
