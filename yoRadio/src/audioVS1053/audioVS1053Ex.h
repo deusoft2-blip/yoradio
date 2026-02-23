@@ -51,7 +51,7 @@ extern __attribute__((weak)) void audio_eof_stream(const char*); // The webstrea
 extern __attribute__((weak)) void audio_progress(uint32_t start, uint32_t durarion);
 extern __attribute__((weak)) void audio_error(const char*);
 
-#define AUDIO_INFO(...) {char buff[512 + 64]; snprintf(buff, sizeof(buff), __VA_ARGS__); if(audio_info) audio_info(buff);}
+#define AUDIO_INFO(...) {char buff[512 + 64]; sprintf(buff,__VA_ARGS__); if(audio_info) audio_info(buff);}
 #define AUDIO_ERROR(...) {char buff[512 + 64]; sprintf(buff,__VA_ARGS__); if(audio_error) audio_error(buff);}
 
 //----------------------------------------------------------------------------------------------------------------------
