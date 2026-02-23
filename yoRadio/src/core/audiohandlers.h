@@ -84,8 +84,10 @@ void audio_id3album(const char *info){
     if(strlen(config.station.title)==0){
       config.setTitle(info);
     }else{
-      char tmp[BUFLEN+3];
-      snprintf(tmp, BUFLEN+3, "%s - %s", config.station.title, info);
+      char tmp[BUFLEN + 3];
+      const size_t titleLen = strlen(config.station.title);
+      const size_t maxInfoLen = (titleLen + 3 >= sizeof(tmp)) ? 0 : sizeof(tmp) - titleLen - 4;
+      snprintf(tmp, sizeof(tmp), "%s - %.*s", config.station.title, (int)maxInfoLen, info);
       config.setTitle(tmp);
     }
   }
