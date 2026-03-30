@@ -624,7 +624,7 @@ void Config::setTimezoneOffset(uint16_t tzo) {
 }
 
 uint16_t Config::getTimezoneOffset() {
-  return 0; // TODO
+  return store.timezoneOffset;
 }
 
 void Config::setSnuffle(bool sn){

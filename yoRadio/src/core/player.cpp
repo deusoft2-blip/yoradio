@@ -120,7 +120,7 @@ void Player::_stop(bool alreadyStopped){
 }
 
 void Player::initHeaders(const char *file) {
-  if(strlen(file)==0 || true) return; //TODO Read TAGs
+  if(strlen(file)==0) return;
   connecttoFS(sdman,file);
   eofHeader = false;
   while(!eofHeader) Audio::loop();
