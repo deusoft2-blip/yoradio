@@ -184,8 +184,14 @@ void Telnet::on_connect(const char* str, uint8_t clientId) {
 
 void Telnet::info() {
   telnet.printf("##CLI.INFO#\n");
-  strftime(config.tmpBuf, sizeof(config.tmpBuf), "%Y-%m-%dT%H:%M:%S+03:00", &network.timeinfo);
-  telnet.printf("##SYS.DATE#: %s\n", config.tmpBuf); //TODO timezone offset
+  int16_t tzOffset = config.getTimezoneOffset();
+  char tzSign = (tzOffset >= 0) ? '+' : '-';
+  int16_t tzAbs = abs(tzOffset);
+  int16_t tzHours = tzAbs / 3600;
+  int16_t tzMinutes = (tzAbs % 3600) / 60;
+  snprintf(config.tmpBuf, sizeof(config.tmpBuf), "%%Y-%%m-%%dT%%H:%%M:%%S%c%02d:%02d", tzSign, tzHours, tzMinutes);
+  strftime(config.tmpBuf, sizeof(config.tmpBuf), config.tmpBuf, &network.timeinfo);
+  telnet.printf("##SYS.DATE#: %s\n", config.tmpBuf);
   telnet.printf("##CLI.NAMESET#: %d %s\n", config.lastStation(), config.station.name);
   if (player.status() == PLAYING) {
     telnet.printf("##CLI.META#: %s\n",  config.station.title);

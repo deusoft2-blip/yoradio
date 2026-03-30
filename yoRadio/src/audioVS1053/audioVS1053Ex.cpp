@@ -1692,11 +1692,12 @@ void Audio::setVUmeter() {
  */
 //const uint8_t everyn = 4;
 void Audio::computeVUlevel() {
-  /*if(!VS_PATCH_ENABLE) return;
+  if(!VS_PATCH_ENABLE) return;
   static uint8_t cc = 0;
   cc++;
+  const uint8_t everyn = 4;
   if(!_vuInitalized || !config.store.vumeter || cc!=everyn) return;
-  if(cc==everyn) cc=0;*/
+  if(cc==everyn) cc=0;
   int16_t reg = read_register(SCI_AICTRL3);
   vuLeft = map((uint8_t)(reg & 0x00FF), 85, 92, 0, 255);
   vuRight = map((uint8_t)(reg >> 8), 85, 92, 0, 255);
